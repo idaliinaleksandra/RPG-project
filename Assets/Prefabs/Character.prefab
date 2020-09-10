@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da59f979c4e86f241bd40192019300fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpeed: 6
 --- !u!95 &6345038547359666033
 Animator:
   serializedVersion: 3
@@ -118,7 +119,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6345038547359666031}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: d288a0e4a2d923b46898986e979da643, type: 3}
+  m_Avatar: {fileID: 9000000, guid: fd7d68a65822e4a44a9ef78850e64cfc, type: 3}
   m_Controller: {fileID: 9100000, guid: 00a22a4ec1223e64293b0caccb9dc1c9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -140,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95fdbcd19f3777c47b9ba2a5d8c51e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  healthPoints: 100
 --- !u!114 &2846806782779054709
 MonoBehaviour:
   m_ObjectHideFlags: 0
