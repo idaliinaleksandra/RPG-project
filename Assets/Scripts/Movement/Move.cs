@@ -5,11 +5,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using RPG.Saving;
 
 
 namespace RPG.Movement
 {
-    public class Move : MonoBehaviour, IAction
+    public class Move : MonoBehaviour, IAction, ISaveable
     {
         [SerializeField] float maxSpeed = 6f;
 
@@ -58,6 +59,20 @@ namespace RPG.Movement
         public void Cancel()
         {
             agent.isStopped = true;
+        }
+
+        public object CaptureState()
+        {
+            return new SerializableVector3(transform.position);
+        }
+
+        public void RestoreState(object state)
+        {
+            SerializableVector3 pos = (SerializableVector3)state;
+            GetComponent<NavMeshAgent>().enabled = false;
+            transform.position = pos.ToVector();
+            GetComponent<NavMeshAgent>().enabled = true;
+            GetComponent<ActionScheduler>().CancelCurrentAction();
         }
     }
 }

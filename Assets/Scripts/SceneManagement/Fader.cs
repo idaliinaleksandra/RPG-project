@@ -9,7 +9,7 @@ namespace RPG.SceneMnagement
         CanvasGroup canvasGroup;
 
 
-        private void Start()
+        private void Awake()
         {
             canvasGroup = GetComponent<CanvasGroup>();
         }
@@ -20,7 +20,6 @@ namespace RPG.SceneMnagement
             {
                 canvasGroup.alpha += Time.deltaTime / time;
                 yield return null;
-                print("HALOO");
             }
             yield return null;
         }
@@ -30,10 +29,14 @@ namespace RPG.SceneMnagement
             while (canvasGroup.alpha > 0)
             {
                 canvasGroup.alpha -= Time.deltaTime / time;
-                print("halooo");
                 yield return null;
             }
             yield return null;
+        }
+
+        public void FadeOutImmediate()
+        {
+            canvasGroup.alpha = 1f;
         }
 
     }
