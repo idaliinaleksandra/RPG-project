@@ -1,4 +1,5 @@
-﻿using RPG.Core;
+﻿using System;
+using RPG.Core;
 using UnityEngine;
 
 namespace RPG.Combat {
@@ -15,6 +16,9 @@ namespace RPG.Combat {
         [Header("Projectile")]
         [SerializeField] Projectile projectile = null;
         [SerializeField] float projectileSpeed = 0f;
+        [SerializeField] bool homing = false;
+
+        const string weaponName = "Weapon";
 
         public float Damage { get => damage; }
         public float Range { get => range; }
@@ -23,19 +27,40 @@ namespace RPG.Combat {
 
         public void Wield(Transform rightHand, Transform leftHand, Animator animator)
         {
+            UnwieldOldWeapon(rightHand, leftHand);
+
             if (prefab != null)
             {
-                Instantiate(prefab, GetHand(rightHand, leftHand));
+                GameObject wep = Instantiate(prefab, GetHand(rightHand, leftHand));
+                wep.name = weaponName;
             }
+
+            var overrideController = animator.runtimeAnimatorController as AnimatorOverrideController;
 
             if (animatorOverride != null)
                 animator.runtimeAnimatorController = animatorOverride;
+            else if(overrideController != null)
+                animator.runtimeAnimatorController = overrideController.runtimeAnimatorController;
+
+        }
+
+        private void UnwieldOldWeapon(Transform rightHand, Transform leftHand)
+        {
+            Transform oldWeapon = rightHand.Find(weaponName);
+
+            if (oldWeapon == null)
+                oldWeapon = leftHand.Find(weaponName);
+
+            if (oldWeapon == null) return;
+
+            oldWeapon.name = "Destroy";
+            Destroy(oldWeapon.gameObject);
         }
 
         public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target)
         {
             Projectile projectileInstance = Instantiate(projectile, GetHand(rightHand, leftHand).position, Quaternion.identity);
-            projectileInstance.SetValues(target, damage, projectileSpeed);
+            projectileInstance.SetValues(target, damage, projectileSpeed, homing);
         }
 
         private Transform GetHand(Transform rightHand, Transform leftHand)

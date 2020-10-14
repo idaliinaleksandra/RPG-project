@@ -1,20 +1,52 @@
 ﻿using RPG.Combat;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickupItem : MonoBehaviour
+namespace RPG.Combat
 {
-    [SerializeField] Weapon weapon;
-
-    private void OnTriggerEnter(Collider other)
+    public class PickupItem : MonoBehaviour
     {
-       var player = GameObject.FindGameObjectWithTag("Player");
+        [SerializeField] Weapon weapon;
+        [SerializeField] bool respawn = false;
 
-        if (other.CompareTag(player.tag))
+        Collider collider;
+
+        private void Start()
         {
-            player.GetComponent<Fighter>().EquipWeapon(weapon);
-            Destroy(gameObject);
+            collider = GetComponent<Collider>();
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            var player = GameObject.FindGameObjectWithTag("Player");
+
+            if (other.CompareTag(player.tag))
+            {
+                player.GetComponent<Fighter>().EquipWeapon(weapon);
+                Destroy(gameObject);
+
+                if (respawn)
+                    StartCoroutine(HideForSeconds(5f));
+            }
+        }
+
+        private IEnumerator HideForSeconds(float seconds)
+        {
+            ShowPickup(false);
+            yield return new WaitForSeconds(seconds);
+            ShowPickup(true);
+        }
+
+        private void ShowPickup(bool show)
+        {
+            collider.enabled = show;
+
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(show);
+            }
         }
     }
 }

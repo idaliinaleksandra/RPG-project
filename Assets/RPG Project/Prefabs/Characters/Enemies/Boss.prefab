@@ -7,10 +7,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1437906885952927769, guid: bb5f15cf4d625b24f81cb0215fcd4372,
+        type: 3}
+      propertyPath: attackDamage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437906885952927769, guid: bb5f15cf4d625b24f81cb0215fcd4372,
+        type: 3}
+      propertyPath: defaultWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: f535bc03c0efd184cb812507f3777c0a,
+        type: 2}
+    - target: {fileID: 1437906885952927769, guid: bb5f15cf4d625b24f81cb0215fcd4372,
+        type: 3}
+      propertyPath: leftHand
+      value: 
+      objectReference: {fileID: 8776645136794192019}
+    - target: {fileID: 1437906885952927769, guid: bb5f15cf4d625b24f81cb0215fcd4372,
+        type: 3}
+      propertyPath: rightHand
+      value: 
+      objectReference: {fileID: 8776645136794169177}
+    - target: {fileID: 1680622821138645462, guid: bb5f15cf4d625b24f81cb0215fcd4372,
+        type: 3}
+      propertyPath: healthPoints
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 6345038547359666031, guid: bb5f15cf4d625b24f81cb0215fcd4372,
         type: 3}
       propertyPath: m_Name
       value: Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 6345038547359666032, guid: bb5f15cf4d625b24f81cb0215fcd4372,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7822884974355252739, guid: bb5f15cf4d625b24f81cb0215fcd4372,
         type: 3}
@@ -66,21 +97,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6345038547359666032, guid: bb5f15cf4d625b24f81cb0215fcd4372,
-        type: 3}
-      propertyPath: maxSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1437906885952927769, guid: bb5f15cf4d625b24f81cb0215fcd4372,
-        type: 3}
-      propertyPath: attackDamage
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1680622821138645462, guid: bb5f15cf4d625b24f81cb0215fcd4372,
-        type: 3}
-      propertyPath: healthPoints
-      value: 70
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb5f15cf4d625b24f81cb0215fcd4372, type: 3}
@@ -147,3 +163,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10b8f8b81a78d2b488d260466a8883d3, type: 3}
+--- !u!4 &8776645136794192019 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 435962, guid: 10b8f8b81a78d2b488d260466a8883d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 8776645136793841257}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8776645136794169177 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 459056, guid: 10b8f8b81a78d2b488d260466a8883d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 8776645136793841257}
+  m_PrefabAsset: {fileID: 0}

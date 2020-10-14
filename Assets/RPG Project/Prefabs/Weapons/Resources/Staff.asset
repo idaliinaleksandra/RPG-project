@@ -10,9 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4340fee3d8b96694e86067a39cf6addb, type: 3}
-  m_Name: Unarmed
+  m_Name: Staff
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  damage: 0
-  range: 2
-  animatorOverride: {fileID: 0}
+  prefab: {fileID: 2918600652546570103, guid: c1567183d85429543906d3e1c721e8e2, type: 3}
+  damage: 10
+  range: 20
+  animatorOverride: {fileID: 22100000, guid: 5354a7de314c4014698c0cef9566662b, type: 2}
+  leftHanded: 0
+  projectile: {fileID: 7622997789786548467, guid: e4c46524d0dbfe143a56aa236d97ee5e,
+    type: 3}
+  projectileSpeed: 10
+  homing: 0

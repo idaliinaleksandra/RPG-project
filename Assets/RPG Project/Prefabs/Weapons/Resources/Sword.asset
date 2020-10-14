@@ -17,3 +17,6 @@ MonoBehaviour:
   range: 2
   animatorOverride: {fileID: 22100000, guid: 424b5595346566e4aa0802b219f63b94, type: 2}
   leftHanded: 0
+  projectile: {fileID: 0}
+  projectileSpeed: 0
+  homing: 0
