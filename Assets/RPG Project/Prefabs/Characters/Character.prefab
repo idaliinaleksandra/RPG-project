@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2023437669}
   - component: {fileID: 1437906885952927769}
   - component: {fileID: 2995055463393480616}
+  - component: {fileID: 9069104414946520724}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -64,6 +65,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -179,9 +181,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33affd189db63a7429058ce52e3b084c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponReage: 2
   timeBetweenAttack: 0.5
   attackDamage: 10
+  rightHand: {fileID: 0}
+  leftHand: {fileID: 0}
+  defaultWeapon: {fileID: 0}
 --- !u!114 &2995055463393480616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,3 +199,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uniqueID: 
+--- !u!114 &9069104414946520724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6345038547359666031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0fcc0ac8f0d5184a9c96ea4a725530a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingLevel: 1
+  characterClass: 1
+  progression: {fileID: 11400000, guid: 895f23404577ce2418057c431ae08595, type: 2}

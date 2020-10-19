@@ -39,6 +39,11 @@ namespace RPG.Saving
             RestoreState(LoadFile(saveFile));
         }
 
+        public void Delete(string saveFile)
+        {
+            File.Delete(GetPathFromSaveFile(saveFile));
+        }
+
         private void SaveFile(string saveFile, object state)
         {
             string path = GetPathFromSaveFile(saveFile);
@@ -50,7 +55,6 @@ namespace RPG.Saving
                 formatter.Serialize(stream, state);
             }
         }
-
 
         private Dictionary<string, object> LoadFile(string saveFile)
         {
