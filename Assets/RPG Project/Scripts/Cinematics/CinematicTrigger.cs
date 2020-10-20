@@ -1,13 +1,18 @@
-﻿using System.Collections;
+﻿using RPG.Saving;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
 namespace RPG.Cinematics
 {
-    public class CinematicTrigger : MonoBehaviour
+    public class CinematicTrigger : MonoBehaviour, ISaveable
     {
-        bool triggered = false; 
+        bool triggered;
+
+        private void Update()
+        {
+        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -15,9 +20,18 @@ namespace RPG.Cinematics
             {
                 GetComponent<PlayableDirector>().Play();
                 triggered = true;
-
             }
             else return;
+        }
+
+        public object CaptureState()
+        {
+            return triggered;
+        }
+
+        public void RestoreState(object state)
+        { 
+            triggered = (bool)state;
         }
 
     }

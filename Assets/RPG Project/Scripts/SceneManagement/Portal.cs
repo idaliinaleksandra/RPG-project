@@ -20,10 +20,14 @@ namespace RPG.SceneMnagement
         [SerializeField] float fadeWaitTime = 1f;
 
         SavingWrapper savingWrapper;
+        Collider collider;
+
+        bool triggered = false;
 
         private void Start()
         {
             savingWrapper = FindObjectOfType<SavingWrapper>();
+            collider = GetComponent<Collider>();
         }
 
         enum DestinationIdentifier
@@ -33,8 +37,10 @@ namespace RPG.SceneMnagement
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player"))
+            if (other.tag == "Player")
+            {
                 StartCoroutine(Transition());
+            }
 
         }
 
@@ -57,10 +63,10 @@ namespace RPG.SceneMnagement
 
             savingWrapper.Load();
 
-            yield return new WaitForSeconds(fadeWaitTime);
-
             Portal otherPortal = GetOtherPortal();
             UpdatePlayer(otherPortal);
+
+            yield return new WaitForSeconds(fadeWaitTime);
 
             savingWrapper.Save();
 

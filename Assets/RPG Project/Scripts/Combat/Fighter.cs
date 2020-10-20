@@ -19,7 +19,7 @@ namespace RPG.Combat
         float timeSinceLastAttack = Mathf.Infinity;
         private Weapon currentWeapon;
 
-        private void Start()
+        private void Awake()
         {
             if(currentWeapon == null)
             {
@@ -137,12 +137,16 @@ namespace RPG.Combat
 
         public object CaptureState()
         {
-            Debug.Log("HALOO " + currentWeapon.name);
+            if (tag == "Player")
+                print("WEAPON CAPTURE " + currentWeapon.name);
             return currentWeapon.name;
         }
 
         public void RestoreState(object state)
         {
+            if (tag == "Player")
+                print("WEAPON " + (string)state);
+
             string weaponName = (string)state;
             Weapon weapon = UnityEngine.Resources.Load<Weapon>(weaponName);
             EquipWeapon(weapon);
