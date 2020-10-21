@@ -17,7 +17,7 @@ namespace RPG.Movement
 
         Ray lastRay;
 
-        void Start()
+        void Awake()
         {
             agent = gameObject.GetComponent<NavMeshAgent>();
             health = gameObject.GetComponent<Health>();

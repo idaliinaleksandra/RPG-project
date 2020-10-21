@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 3178588227170450920, guid: 9251497f69895534ca5e05099a56c5ec, type: 3}
   damage: 2
+  percentageBonus: 10
   range: 2
   animatorOverride: {fileID: 22100000, guid: 424b5595346566e4aa0802b219f63b94, type: 2}
   leftHanded: 0

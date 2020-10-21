@@ -8,6 +8,7 @@ namespace RPG.Combat {
         [SerializeField] GameObject prefab = null;
         [Space]
         [SerializeField] float damage;
+        [SerializeField] float percentageBonus;
         [SerializeField] float range = 2f;
         [Space]
         [SerializeField] AnimatorOverrideController animatorOverride = null;
@@ -20,6 +21,7 @@ namespace RPG.Combat {
         const string weaponName = "Weapon";
 
         public float Damage { get => damage; }
+        public float PercentageBonus { get => percentageBonus; }
         public float Range { get => range; }
         public bool LeftHanded { get => leftHanded; }
         public float ProjectileSpeed { get => projectileSpeed; }
@@ -56,10 +58,10 @@ namespace RPG.Combat {
             Destroy(oldWeapon.gameObject);
         }
 
-        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, GameObject instigator)
+        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, GameObject instigator, float calculatedDamage)
         {
             Projectile projectileInstance = Instantiate(projectile, GetHand(rightHand, leftHand).position, Quaternion.identity);
-            projectileInstance.SetValues(target, instigator, damage, projectileSpeed, homing);
+            projectileInstance.SetValues(target, instigator, calculatedDamage, projectileSpeed, homing);
         }
 
         private Transform GetHand(Transform rightHand, Transform leftHand)

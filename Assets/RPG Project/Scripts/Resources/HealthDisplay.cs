@@ -21,10 +21,10 @@ namespace RPG.Resources
 
         private void Update()
         {
-            playerHPText.text = String.Format("PLAYER HP: {0:0.0}%", health.GetPercentage());
+            playerHPText.text = String.Format("PLAYER HP: {0:0} / {1:0}", health.GetCurrentHealthPoints(), health.GetMaxHealthPoints());
 
-            if (fighter.GetTarget() != null && fighter.GetTarget().GetPercentage() != 0f)
-                enemyHPText.text = String.Format("ENEMY HP: {0:0.0}%", fighter.GetTarget().GetPercentage());
+            if (fighter.GetTarget() != null && fighter.GetTarget().GetCurrentHealthPoints() != 0f)
+                enemyHPText.text = String.Format("ENEMY HP: {0:0} / {1:0}", fighter.GetTarget().GetCurrentHealthPoints(), fighter.GetTarget().GetMaxHealthPoints());
             else
                 enemyHPText.text = "";
         }
