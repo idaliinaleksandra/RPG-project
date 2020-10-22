@@ -1,4 +1,5 @@
 ﻿using RPG.Combat;
+using RPG.Control;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,14 +7,14 @@ using UnityEngine;
 
 namespace RPG.Combat
 {
-    public class PickupItem : MonoBehaviour
+    public class PickupItem : MonoBehaviour, IRaycastable
     {
         [SerializeField] Weapon weapon;
         [SerializeField] bool respawn = false;
 
         Collider collider;
 
-        private void Start()
+        private void Awake()
         {
             collider = GetComponent<Collider>();
         }
@@ -24,12 +25,18 @@ namespace RPG.Combat
 
             if (other.CompareTag(player.tag))
             {
-                player.GetComponent<Fighter>().EquipWeapon(weapon);
-                Destroy(gameObject);
-
-                if (respawn)
-                    StartCoroutine(HideForSeconds(5f));
+                Pickup(player.GetComponent<Fighter>());
             }
+        }
+
+        private void Pickup(Fighter fighter)
+        {
+            fighter.EquipWeapon(weapon);
+
+            if(!respawn)
+                Destroy(gameObject);
+            else
+                StartCoroutine(HideForSeconds(5f));
         }
 
         private IEnumerator HideForSeconds(float seconds)
@@ -47,6 +54,20 @@ namespace RPG.Combat
             {
                 child.gameObject.SetActive(show);
             }
+        }
+
+        public CursorType GetCursorType()
+        {
+            return CursorType.Item;
+        }
+
+        public bool HandleRaycast(PlayerController callingController)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Pickup(callingController.GetComponent<Fighter>());
+            }
+            return true;
         }
     }
 }

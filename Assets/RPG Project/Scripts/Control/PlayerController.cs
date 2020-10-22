@@ -2,6 +2,9 @@
 using RPG.Movement;
 using RPG.Combat;
 using RPG.Resources;
+using System;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 namespace RPG.Control
 {
@@ -10,6 +13,16 @@ namespace RPG.Control
 
         Fighter fighter;
         Health health;
+
+        [Serializable]
+        struct CursorMapping
+        {
+            public CursorType type;
+            public Texture2D texture;
+            public Vector2 hotspot;
+        }
+
+        [SerializeField] CursorMapping[] cursorMappings = null;
 
         void Awake()
         {
@@ -24,14 +37,50 @@ namespace RPG.Control
 
         void Update()
         {
-            if (health.IsDead()) return;
+            if (InteractWithUI()) return;
+            if (health.IsDead())
+            {
+                SetCursor(CursorType.None);
+                return;
+            }
 
-            if (InteractWithCombat()) return;
+            if (InteractWithComponent()) return;
             if (InteractWithMovement()) return;
-            print("Nothing to do");
+
+            SetCursor(CursorType.None);
         }
 
-        private bool InteractWithCombat()
+        private bool InteractWithUI()
+        {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                SetCursor(CursorType.UI);
+                return true;
+            }
+            else return false;
+        }
+
+        private bool InteractWithComponent()
+        {
+            RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
+
+            foreach (RaycastHit hit in hits)
+            {
+                IRaycastable [] raycastables = hit.transform.GetComponents<IRaycastable>();
+
+                foreach (IRaycastable raycastable in raycastables)
+                {
+                    if (raycastable.HandleRaycast(this))
+                    {
+                        SetCursor(raycastable.GetCursorType());
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        /*private bool InteractWithCombat()
         {
             RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
 
@@ -47,10 +96,11 @@ namespace RPG.Control
                 {
                     fighter.Attack(target.gameObject);
                 }
+                SetCursor(CursorType.Combat);
                 return true;
             }
             return false;
-        }
+        }*/
 
         private bool InteractWithMovement()
         {
@@ -64,9 +114,28 @@ namespace RPG.Control
                 {
                     GetComponent<Move>().StartMoveAction(hit.point, 1f);
                 }
+                SetCursor(CursorType.Movement);
                 return true;
             }
             return false;
+        }
+
+        private void SetCursor(CursorType cursorType)
+        {
+            CursorMapping mapping = GetCursorMapping(cursorType);
+            Cursor.SetCursor(mapping.texture, mapping.hotspot, CursorMode.Auto);
+        }
+
+        private CursorMapping GetCursorMapping(CursorType cursorType)
+        {
+            foreach (CursorMapping mapping in cursorMappings)
+            {
+                if (mapping.type == cursorType)
+                {
+                    return mapping;
+                }
+            }
+            return cursorMappings[0];
         }
     }
 }
